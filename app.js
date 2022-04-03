@@ -34,6 +34,8 @@ const userLogin = require('./model/userlogin');//user login model
 
 const additem =require('./model/addItem');//items model
 
+const userHistory = require('./model/history')
+
 
 //requiring bodyparser to read json easily
 const bodyParser= require('body-parser');
@@ -185,7 +187,8 @@ app.post('/addItem',(req,res)=>{
     const sess= req.session;
     const collect= req.body;
     const newItem = new additem()
-
+    var addhistory = new userHistory();
+    var now= new Date()
     if (sess.usernameStrg) {
         if(collect.itemName==""|| collect.itemQuantity=="" || collect.dateTime==""){
             res.render('addItem', {message:"fill the form completely"})
@@ -198,7 +201,18 @@ app.post('/addItem',(req,res)=>{
                 if (err) {
                     console.log(err);
                 }else{
-                    res.redirect("/");
+                    addhistory.userName= sess.usernameStrg
+                    addhistory.itemName = collect.itemName
+                    addhistory.action = "Added Item"
+                    addhistory.qauntityActed= collect.itemQuantity;
+                    // addhistory.date = toString(now.getDate)+"-"+toString(now.getMonth)+"-"+toString(now.getFullYear)+"--"+toString(now.getHours)+":"+toString(now.getMinutes);
+                    addhistory.save((err)=>{
+                                        if (err){
+                                            console.log(err);
+                                        }else{
+                                            res.redirect("/")
+                                        }
+                    })
                 }
             })
         }
@@ -211,19 +225,34 @@ app.post('/addItem',(req,res)=>{
 app.get('/delete/:ids',(req,res)=>{
     const routing= req.params.ids;
     var sess =req.session;
+    var addhistory = new userHistory();
+    var now= new Date()
     if(sess.usernameStrg){
-        additem.find({_id:routing, userName:sess.usernameStrg},(err,data)=>{
+        additem.findOne({_id:routing, userName:sess.usernameStrg},(err,data)=>{
             if (err){
                 console.log(err);
             }else{
                 if (data) {
+                    
                     additem.remove({_id:routing, userName:sess.usernameStrg},(err)=>{
                         if (err) {
                             console.log(err);
                         }else{
                             console.log("deleted");
-                            res.redirect("/")
+                            // res.redirect("/")
                         }
+                    })
+                    addhistory.userName= sess.usernameStrg
+                    addhistory.itemName = data.itemName
+                    addhistory.action = "deleted"
+                    addhistory.qauntityActed= data.quantity;
+                    // addhistory.date = toString(now.getDate)+"-"+toString(now.getMonth)+"-"+toString(now.getFullYear)+"--"+toString(now.getHours)+":"+toString(now.getMinutes);
+                    addhistory.save((err)=>{
+                                        if (err){
+                                            console.log(err);
+                                        }else{
+                                            res.redirect("/")
+                                        }
                     })
                 }else{
                     res.redirect("/unkown")
@@ -241,6 +270,8 @@ app.get('/delete/:ids',(req,res)=>{
 app.get('/add/:ids', (req,res)=>{
     var sess =req.session;
     var routing = req.params.ids
+    var addhistory = new userHistory();
+    var now= new Date()
     if (sess.usernameStrg) {
         additem.findOne({_id:routing, userName:sess.usernameStrg}, (err, data) => {
             //i stopped here
@@ -254,10 +285,25 @@ app.get('/add/:ids', (req,res)=>{
                         if (err) {
                             console.log(err);
                         }else{
-                            res.redirect("/");
+                            
+                                    
+                                
+                            
+                            // res.redirect("/");
                         }
                     })
-                    
+                    addhistory.userName= sess.usernameStrg
+                    addhistory.itemName = data.itemName
+                    addhistory.action = "increased"
+                    addhistory.qauntityActed= 1;
+                    // addhistory.date = toString(now.getDate)+"-"+toString(now.getMonth)+"-"+toString(now.getFullYear)+"--"+toString(now.getHours)+":"+toString(now.getMinutes);
+                    addhistory.save((err)=>{
+                                        if (err){
+                                            console.log(err);
+                                        }else{
+                                            res.redirect("/")
+                                        }
+                    })
                 }else{
                     res.redirect("/unkownuseredit");
                 }
@@ -272,7 +318,8 @@ app.get('/add/:ids', (req,res)=>{
 app.get('/minus/:ids',(req,res)=>{
     var idNem= req.params.ids;
     var sess= req.session;
-
+    var addhistory = new userHistory();
+    var now= new Date()
     if (sess.usernameStrg){
         additem.findOne({_id:idNem, userName:sess.usernameStrg},(err, data)=>{
             if (err) {
@@ -290,8 +337,20 @@ app.get('/minus/:ids',(req,res)=>{
                             if(err){
                                 console.log(err);
                             }else{
+                                addhistory.userName= sess.usernameStrg
+                                addhistory.itemName = data.itemName
+                                addhistory.action = "removed"
+                                addhistory.qauntityActed= 1;
+                                // addhistory.date = now.getDate+"-"+toString(now.getMonth)+"-"+toString(now.getFullYear)+"--"+toString(now.getHours)+":"+toString(now.getMinutes);
+                                addhistory.save((err)=>{
+                                    if (err){
+                                        console.log(err);
+                                    }else{
+                                        res.redirect("/")
+                                    }
+                                })
                                 // res.jsonp({success:true})
-                                res.redirect("/")
+                               
                             }
                         })
 
@@ -306,6 +365,28 @@ app.get('/minus/:ids',(req,res)=>{
         res.redirect('/uknown')
     }
 })
+
+
+
+
+
+//transaction histories
+app.get("/history", (req,res)=>{
+    const sess = req.session;
+    if (sess.usernameStrg){
+        userHistory.find({userName: sess.usernameStrg}, (err, data)=>{
+            if (err){
+                console.log(err);
+            }else{
+                res.render("history", {history:data, name: sess.usernameStrg});
+            }
+        })
+    }else{
+        res.redirect("/")
+    }
+})
+
+
 
 
 
