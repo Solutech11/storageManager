@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+</head>
+<body>
+    <h1>welcome to your storage list <%= name %></h1>
+    <a href="/logout">logout</a>
+
+
+    <br>
+    <br>
+    <a href="/addItem">Add Item</a>
+
+    <br>
+    <% if (items.length!=0) { %>
+        <!-- <%= "carot" %> -->
+        <% for (let i = items.length-1; i >=0 ; i--) { %>
+            <div>
+                <div>
+                    <h2><%= items[i].itemName %> (<%= items[i].quantity %>)  </h2>
+                    <h3><%= items[i].Date %></h3>
+                </div>
+                <div>
+                    <!-- <%= items[i]._id %> -->
+                    <a href="/delete/<%= items[i]._id %>" >Delete</a>
+                    <a href="/add/<%= items[i]._id %>">+</a>
+                    <a href="/minus/<%= items[i]._id %>">-</a>
+                    
+                </div>
+                
+            </div>
+        <% } %>
+    <% }else{ %>
+        <center>
+
+        
+            <h1>
+                <a href="/addItem">Add Item</a>
+            </h1>
+
+        </center>
+
+    <% } %>
+</body>
+</html>
