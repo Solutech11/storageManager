@@ -1,26 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <link rel="stylesheet" type="text/css" href="history.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History</title>
 </head>
-<body>
-    <h2><%= name %> history</h2>
-    <a href="/">Home</a>
-    <!-- <h1>history[0]. </h1> -->
-    <% if (history!=[] || history.length!=0) { %>
-        <% for (let i = history.length-1; i >= 0; i--) { %>
-            <div>
-                <h2><%= history[i].action %> <%= history[i].qauntityActed %> ...... <%= history[i].itemName %></h2>
-                <p><%= history[i].date %></p>
-            </div>
-            
-        <% } %>
 
-    <% } else { %>
-        <h3>No history yet</h3>
+<body>
+    <div class="Name">
+        <h1> Storage Manager </h1>
+        <div class="header">
+            <!-- <h1> Storage Manager </h1> -->
+            <div class="left">
+                <h2>
+                    <%= name %> history
+                </h2>
+                <!-- <a href="/">Home</a> -->
+                <!-- <h1>history[0]. </h1> -->        
+                <a href="/" class="atag">Home</a>       
+            </div>
+        </div>
+    </div>
+    <% if (history!=[] || history.length!=0) { %>
+        <% for (let i=history.length-1; i>= 0; i--) { %>
+    <h2>
+        <%= history[i].action %>
+            <%= history[i].qauntityActed %> ...... <%= history[i].itemName %>
+    </h2>
+    <p>
+        <%= history[i].date %>
+    </p>
+    </div>
+    <hr>
+
     <% } %>
+
+        <% } else { %>
+            <h3>No history yet</h3>
+            <% } %>
+                
+
 </body>
+
 </html>
