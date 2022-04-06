@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000
 // requiring our database
 const mongoose = require('mongoose');
 //connecting datbase
-mongoose.connect("mongodb+srv://Solutech:Xerewgida@cluster0.whfg7.mongodb.net/Cluster0?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology:true}).then((result)=>{
+mongoose.connect("mongodb+srv://soluwizy@gmail.com:Xerewgida@cluster0.whfg7.mongodb.net/Cluster0?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology:true}).then((result)=>{
     if (result){
         console.log("Your database is connected");
 
