@@ -20,7 +20,7 @@ mongoose.connect("mongodb+srv://soludo:adigwerex@storage.whfg7.mongodb.net/Stora
 
         // when db is connected then load our server                
         // creating our server 
-        app.listen(post,()=>{
+        app.listen(port,()=>{
             console.log("http://localhost:5500/");
         });
     }
