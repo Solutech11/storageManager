@@ -9,7 +9,7 @@ const sesseion = require('express-session');
 // initializing my session
 app.use(sesseion({secret:"TheresaSoludoPrinceNsea", saveUninitialized:true, resave:true}))
 
-
+const port = process.env.PORT || 3000
 
 // requiring our database
 const mongoose = require('mongoose');
@@ -20,7 +20,7 @@ mongoose.connect("mongodb://localhost:27017/StoragMNg",{useNewUrlParser:true,use
 
         // when db is connected then load our server                
         // creating our server 
-        app.listen(5500,()=>{
+        app.listen(post,()=>{
             console.log("http://localhost:5500/");
         });
     }
