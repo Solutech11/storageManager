@@ -5,9 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add item</title>
+    <link rel="stylesheet" href="log.css">
 </head>
 <body>
-    <h1><%= message %></h1>
+
+    <h1>Add Items</h1><br>    
+    <div class="add">    
+    <form method="post" action="/addItem">   
+        <label><b>Item Name     
+        </b>    
+        </label>    
+        <input type="text" name="itemName" id="Uname" placeholder="Add Item" required> 
+        <br><br>
+        <label><b>Quantity    
+        </b>    
+        </label>    
+        <input type="number" name="itemQuantity" id="Uname" placeholder="Add Quantity" required>    
+        <br><br>       
+        <label><b>Date/Time    
+        </b>    
+        </label>    
+        <input type="datetime-local" name="dateTime" id="Pass" placeholder="Password" required>    
+        <br><br>    
+        <input type="submit" id="log" value="submit">       
+          
+    </form>     
+</div>    
+
+
+    <!-- <h1><%= message %></h1>
     <form action="/addItem" method="post">
         <label for="itemName">Item name</label><br>
         <input type="text" name="itemName" required >
@@ -17,11 +43,10 @@
         <input type="number" name="itemQuantity" required>
         <br><br>
 
-        <label for="datetime" >datetime</label><br>
-        <p>leave the date of its now</p><br>
+        <label for="datetime" >Date/Time</label><br>
         <input type="datetime-local" name="dateTime" required><br><br>
 
         <input type="submit">
-    </form>
+    </form> -->
 </body>
 </html>

@@ -5,9 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="log.css">
 </head>
 <body>
     <!-- <a href="/register">Reguster</a> -->
+    <h2>LogIn</h2><br>    
+    <div class="login">    
+    <form id="login" method="post" action="/login">    
+        <div id="not"><p><%= msg %></p></div>   
+
+        <label><b>UserName     
+        </b>    
+        </label>    
+        <input type="text" name="UserName" id="Uname" placeholder="Username" required> 
+        <br><br>
+        <!-- <label><b>Address    
+        </b>    
+        </label>    
+        <input type="text" name="address" id="Uname" placeholder="Address" required>    
+        <br><br>        -->
+        <label><b>Password     
+        </b>    
+        </label>    
+        <input type="password" name="password" id="Pass" placeholder="Password" required>    
+        <br><br>  
+        <input type="submit" id="log" value="Sign Up">       
+        <br><br>    
+        
+         <a href="/register" style="position:absolute; left: 400px;">Create Account</a> 
+         <br><br>
+          
+    </form>     
+</div>    
+<!-- 
 <h1><%= msg %></h1>
     <form action="/login" method="post">
         <label for="UserName">UserName: </label> <br>
@@ -20,6 +50,6 @@
         <input type="submit" >
     </form>
 
-    <a href="/register">click to register</a>
+    <a href="/register">click to register</a> -->
 </body>
 </html>

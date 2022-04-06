@@ -4,11 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="log.css">
     <title>Register</title>
 </head>
 <body>
     <!-- <a href="/login">Login</a> -->
-    <h1>
+
+    <h2>Sign Up</h2><br>    
+    <div class="login">    
+    <form id="login" method="post" action="/register"> 
+        <div id="not"><p><%= msg %></p></div>   
+        <label><b>UserName     
+        </b>    
+        </label>    
+        <input type="text" name="username" id="Uname" placeholder="Username" required> 
+        <br><br>
+        <label><b>Address    
+        </b>    
+        </label>    
+        <input type="text" name="address" id="Uname" placeholder="Address" required>    
+        <br><br>       
+        <label><b>Password     
+        </b>    
+        </label>    
+        <input type="password" name="password" id="Pass" placeholder="Password" required>    
+        <br><br>    
+        <input type="submit" id="log" value="Sign Up">       
+        
+         <br><br>
+         <a href="/login"> Already have an account</a>   
+    </form>
+
+
+    <!-- <h1>
     <%= msg %>
     </h1>
     <form action="/register" method="post">
@@ -23,6 +51,6 @@
 
         <input type="submit" >
     </form>
-    <a href="/login">click to register</a>
+    <a href="/login">click to register</a> -->
 </body>
 </html>
