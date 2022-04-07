@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000
 // requiring our database
 const mongoose = require('mongoose');
 //connecting datbase
-mongoose.connect("mongodb+srv://soludo:adigwerex@storage.whfg7.mongodb.net/StorageManager?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology:true}).then((result)=>{
+mongoose.connect("mongodb+srv://Cenni:test123@storage.whfg7.mongodb.net/storage?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology:true}).then((result)=>{
     if (result){
         console.log("Your database is connected");
 
